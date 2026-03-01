@@ -16,7 +16,27 @@ const fetchData = async () => {
   try {
     const data = await getAllComplaints();
 
-    console.log("Dashboard API Response:", data);
+    const fetchData = async () => {
+  try {
+    const data = await getAllComplaints();
+
+    console.log("API Response:", data);
+
+    // 🔥 Handle all possible backend formats safely
+    const complaintsArray =
+      data?.complaints ||
+      data?.data ||
+      (Array.isArray(data) ? data : []);
+
+    setComplaints(complaintsArray);
+
+  } catch (err) {
+    console.error("Dashboard fetch error:", err);
+    setComplaints([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
     if (Array.isArray(data)) {
       setComplaints(data);
