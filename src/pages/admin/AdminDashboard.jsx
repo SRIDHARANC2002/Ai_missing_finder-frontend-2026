@@ -8,11 +8,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const t = setInterval(() => setTime(new Date()), 1000);
-    fetchData();
-    return () => clearInterval(t);
-  }, []);
+
 
   // ✅ FIX 1: Single clean fetchData — no nested duplicate
   const fetchData = async () => {
@@ -37,10 +33,34 @@ const AdminDashboard = () => {
     }
   };
     useEffect(() => {
-    const t = setInterval(() => setTime(new Date()), 1000);
-    fetchData();
-    return () => clearInterval(t);
-  }, []);
+  const t = setInterval(() => setTime(new Date()), 1000);
+  
+  // ✅ define AND call inside useEffect — no hoisting issue at all
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await getAllComplaints();
+      console.log("API Response:", data);
+
+      const complaintsArray =
+        data?.complaints ||
+        data?.data ||
+        (Array.isArray(data) ? data : []);
+
+      setComplaints(complaintsArray);
+    } catch (err) {
+      console.error("Dashboard fetch error:", err);
+      setError(err.message || "Failed to load complaints");
+      setComplaints([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  loadData();
+  return () => clearInterval(t);
+}, []);
 
   const activeCount   = complaints.filter(c => c.status === "Approved").length;
   const resolvedCount = complaints.filter(c => c.status === "Completed").length;
