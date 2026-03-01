@@ -36,6 +36,11 @@ const AdminDashboard = () => {
       setLoading(false);
     }
   };
+    useEffect(() => {
+    const t = setInterval(() => setTime(new Date()), 1000);
+    fetchData();
+    return () => clearInterval(t);
+  }, []);
 
   const activeCount   = complaints.filter(c => c.status === "Approved").length;
   const resolvedCount = complaints.filter(c => c.status === "Completed").length;
