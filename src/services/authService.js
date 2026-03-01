@@ -14,8 +14,7 @@ export const register = async (formData) => {
 
   return response.data;
 };
-
-app.options("*", cors()); // handle preflight for ALL routes
+ // handle preflight for ALL routes
 
 
 /* ===========================
