@@ -15,8 +15,9 @@ const VerifyUnknown = () => {
   const [officerNotes, setOfficerNotes] = useState("");
   const [showCompletionBox, setShowCompletionBox] = useState(false);
   const [banner, setBanner] = useState(null); // { type: 'success' | 'error', message: string }
+  const [facingMode, setFacingMode] = useState("user"); // "user" = front, "environment" = back
 
-  const videoConstraints = { width: 480, height: 360, facingMode: "user" };
+  const videoConstraints = { width: 480, height: 360, facingMode };
 
   const showBanner = (type, message) => {
     setBanner({ type, message });
@@ -27,6 +28,10 @@ const VerifyUnknown = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
     setResult(null);
+  };
+
+  const toggleCamera = () => {
+    setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
   };
 
   const dataURLtoBlob = (dataurl) => {
@@ -429,6 +434,36 @@ const VerifyUnknown = () => {
 .vu-camera-sub {
   font-size: 11px; color: rgba(255,255,255,0.35);
   font-weight: 300; letter-spacing: 0.2px;
+}
+
+/* ── Camera flip/toggle button ── */
+.vu-camera-toggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 13px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(212,160,23,0.22);
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 11.5px; font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  flex-shrink: 0;
+}
+
+.vu-camera-toggle:hover {
+  background: rgba(255,255,255,0.13);
+  border-color: rgba(212,160,23,0.45);
+  color: var(--gold-light);
+}
+
+.vu-camera-toggle svg {
+  transition: transform 0.35s ease;
+}
+
+.vu-camera-toggle:hover svg {
+  transform: rotate(180deg);
 }
 
 .vu-viewport {
@@ -998,10 +1033,38 @@ const VerifyUnknown = () => {
                     <div className="vu-camera-sub">
                       {capturedImage
                         ? "Review the image, then run verification or retake"
-                        : "Position the subject's face within the square guide"}
+                        : facingMode === "user"
+                          ? "Position the subject's face within the square guide"
+                          : "Using rear camera — point at the subject's face"}
                     </div>
                   </div>
                 </div>
+
+                {/* ── Camera flip button — only shown when live feed is active ── */}
+                {!capturedImage && (
+                  <button
+                    className="vu-camera-toggle"
+                    onClick={toggleCamera}
+                    title={facingMode === "user" ? "Switch to rear camera" : "Switch to front camera"}
+                  >
+                    {/* flip/rotate icon */}
+                    <svg
+                      width="14" height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M20 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                      <path d="M16 3H8l-2 4h12l-2-4z" />
+                      <circle cx="12" cy="13" r="3" />
+                      <path d="M17 13h2M5 13h2" strokeWidth="1.8" />
+                    </svg>
+                    {facingMode === "user" ? "Rear Cam" : "Front Cam"}
+                  </button>
+                )}
               </div>
 
               <div className="vu-viewport">
