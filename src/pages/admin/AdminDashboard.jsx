@@ -12,17 +12,27 @@ const AdminDashboard = () => {
     fetchData();
     return () => clearInterval(t);
   }, []);
+const fetchData = async () => {
+  try {
+    const data = await getAllComplaints();
 
-  const fetchData = async () => {
-    try {
-      const data = await getAllComplaints();
+    console.log("Dashboard API Response:", data);
+
+    if (Array.isArray(data)) {
       setComplaints(data);
-    } catch (err) {
-      console.error("Failed to fetch dashboard data");
-    } finally {
-      setLoading(false);
+    } else if (Array.isArray(data.complaints)) {
+      setComplaints(data.complaints);
+    } else {
+      setComplaints([]);
     }
-  };
+
+  } catch (err) {
+    console.error("Dashboard fetch error:", err);
+    setComplaints([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const activeCount = complaints.filter(c => c.status === "Approved").length;
   const resolvedCount = complaints.filter(c => c.status === "Completed").length;
