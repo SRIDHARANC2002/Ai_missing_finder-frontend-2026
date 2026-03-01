@@ -57,14 +57,14 @@ const fetchData = async () => {
     },
   ];
 
-  const recentComplaints = complaints.slice(0, 4).map(c => ({
-    id: `CMP-${c._id.slice(-4).toUpperCase()}`,
-    name: c.name,
-    location: c.address,
-    time: new Date(c.createdAt).toLocaleDateString(),
-    status: c.status,
-    imageUrl: c.imageUrl
-  }));
+const recentComplaints = complaints.slice(0, 4).map(c => ({
+  id: c._id ? `CMP-${c._id.slice(-4).toUpperCase()}` : "CMP-0000",
+  name: c.name || "Unknown",
+  location: c.address || "Not Available",
+  time: c.createdAt ? new Date(c.createdAt).toLocaleDateString() : "N/A",
+  status: c.status || "Pending",
+  imageUrl: c.imageUrl || null
+}));
 
   const actions = [
     {
@@ -964,7 +964,10 @@ const fetchData = async () => {
                     return (
                       <div key={i} className="ad-recent-item" style={{ position: 'relative' }}>
                         <div className="ad-recent-avatar">
-                          {r.imageUrl ? <img src={r.imageUrl} alt="" /> : r.name.slice(0, 2).toUpperCase()}
+                          {r.imageUrl 
+  ? <img src={r.imageUrl} alt="" />
+  : (r.name ? r.name.slice(0, 2).toUpperCase() : "NA")
+}
                         </div>
                         <div className="ad-recent-dot" style={{ background: dotColor }} />
                         <div className="ad-recent-info">
