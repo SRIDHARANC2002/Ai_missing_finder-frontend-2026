@@ -528,7 +528,7 @@ const Home = () => {
 
       <div className="home-root">
 
-        {/* AUTHORITY BAND */}
+        {/* AUTHORITY BAND
         <div className="auth-band">
           <div className="auth-band-left">
             <div className="auth-ministry">
@@ -544,7 +544,7 @@ const Home = () => {
             <div className="live-dot" />
             System Active — 24/7 Monitoring
           </div>
-        </div>
+        </div> */}
 
         {/* NAVBAR */}
         <nav className={`home-nav ${scrollY > 20 ? "scrolled" : ""}`}>

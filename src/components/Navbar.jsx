@@ -66,46 +66,7 @@ const Navbar = () => {
           --white:       #ffffff;
         }
 
-        /* ─────────────────────────────────────
-           GOV BAND
-        ───────────────────────────────────── */
-        .nb-gov-band {
-          background: var(--maroon-deep);
-          border-bottom: 1.5px solid var(--gold);
-          padding: 6px 48px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          font-family: 'Lato', sans-serif;
-        }
-
-        .nb-gov-left {
-          display: flex; align-items: center; gap: 14px;
-          font-size: 11px; font-weight: 700;
-          letter-spacing: 0.8px; text-transform: uppercase;
-          color: rgba(255,255,255,0.7);
-        }
-
-        .nb-gov-sep { width: 1px; height: 12px; background: rgba(255,255,255,0.18); }
-
-        .nb-gov-sub {
-          font-weight: 400; letter-spacing: 0.3px;
-          text-transform: none; color: rgba(255,255,255,0.45); font-size: 11px;
-        }
-
-        .nb-gov-right {
-          display: flex; align-items: center; gap: 6px;
-          font-size: 11px; color: rgba(255,255,255,0.4);
-          font-family: 'Lato', sans-serif;
-        }
-
-        .nb-live-dot {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: #fbbf24; animation: nbpulse 2s infinite;
-        }
-
-        @keyframes nbpulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+        
 
         /* ─────────────────────────────────────
            MAIN NAVBAR
@@ -534,7 +495,7 @@ const Navbar = () => {
         }
       `}</style>
 
-      {/* ── GOV BAND ── */}
+      {/* ── GOV BAND ──
       <div className="nb-gov-band">
         <div className="nb-gov-left">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -548,7 +509,7 @@ const Navbar = () => {
           <div className="nb-live-dot" />
           System Operational — 24/7
         </div>
-      </div>
+      </div> */}
 
       {/* ── MAIN NAV ── */}
       <nav className="nb-main">
