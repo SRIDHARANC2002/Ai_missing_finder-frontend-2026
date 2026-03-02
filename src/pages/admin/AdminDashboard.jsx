@@ -120,16 +120,16 @@ const AdminDashboard = () => {
   ];
 
   // ✅ FIX 2: Loading spinner — no blank screen while API loads
-  if (loading) {
-    return (
-      <div style={{ minHeight:"60vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", background:"#faf6f7", gap:"16px" }}>
-        <style>{`@keyframes _spin { to { transform: rotate(360deg); } }`}</style>
-        <div style={{ width:"40px", height:"40px", border:"3px solid #ddc8cc", borderTopColor:"#6b0f1a", borderRadius:"50%", animation:"_spin 0.8s linear infinite" }} />
-        <p style={{ fontFamily:"'Playfair Display', serif", fontSize:"18px", color:"#6b0f1a", fontStyle:"italic" }}>Loading Dashboard...</p>
-        <p style={{ fontSize:"11px", color:"#7a5a60", letterSpacing:"1px", textTransform:"uppercase" }}>Fetching command data</p>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div style={{ minHeight:"60vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", background:"#faf6f7", gap:"16px" }}>
+  //       <style>{`@keyframes _spin { to { transform: rotate(360deg); } }`}</style>
+  //       <div style={{ width:"40px", height:"40px", border:"3px solid #ddc8cc", borderTopColor:"#6b0f1a", borderRadius:"50%", animation:"_spin 0.8s linear infinite" }} />
+  //       <p style={{ fontFamily:"'Playfair Display', serif", fontSize:"18px", color:"#6b0f1a", fontStyle:"italic" }}>Loading Dashboard...</p>
+  //       <p style={{ fontSize:"11px", color:"#7a5a60", letterSpacing:"1px", textTransform:"uppercase" }}>Fetching command data</p>
+  //     </div>
+  //   );
+  // }
 
   // ✅ FIX 3: Error state — shows message + retry button instead of blank screen
   if (error) {
