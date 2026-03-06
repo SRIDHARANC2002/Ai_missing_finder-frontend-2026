@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://ai-missing-finder-backend-2026.onrender.com/api",
+  baseURL: "https://ai-missing-finder-backend-2026.vercel.app/api",
 });
 
 // Interceptor to add token to every request
